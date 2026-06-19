@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import { siteState } from '$lib/states.svelte';
 	import { shuffle } from '$lib/utils';
 	let initialWordsArray = $derived(
@@ -39,29 +40,31 @@
 		lengthSortDirection = !lengthSortDirection;
 	};
 
-    const randomShuffle = () => {
-        shuffle(sortedWordsArray);
-    }
+	const randomShuffle = () => {
+		shuffle(sortedWordsArray);
+	};
 
-    const reverseOrder = () => {
-        sortedWordsArray = initialWordsArray.reverse();
-    }
+	const reverseOrder = () => {
+		sortedWordsArray = initialWordsArray.reverse();
+	};
 </script>
 
 {#if siteState.text}
-	<button onclick={sortByLength} class="border">Sort by length</button>
-	<button onclick={sortAlphabetically} class="border">Sort Alphabetically</button>
-	<button onclick={randomShuffle} class="border">Randomize</button>
-    	<button onclick={reverseOrder} class="border">Reverse</button>
+	<div class="p-4">
+		<Button onclick={sortByLength}>Sort by length</Button>
+		<Button onclick={sortAlphabetically}>Sort Alphabetically</Button>
+		<Button onclick={randomShuffle}>Randomize</Button>
+		<Button onclick={reverseOrder}>Reverse</Button>
 
-	<div class="flex justify-center">
-		<div class="p-4 max-w-lg">
-			{#each sortedWordsArray as word, idx (idx)}
-				<span>
-					{word.toLowerCase()}
-				</span>
-				<span> </span>
-			{/each}
+		<div class="flex justify-center">
+			<div class="p-4 max-w-lg">
+				{#each sortedWordsArray as word, idx (idx)}
+					<span>
+						{word.toLowerCase()}
+					</span>
+					<span> </span>
+				{/each}
+			</div>
 		</div>
 	</div>
 {/if}

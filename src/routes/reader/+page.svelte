@@ -14,12 +14,15 @@
 				};
 			})
 	);
+	let stopChars = '.,?!;:';
+
 	let currIdx = $state(0);
 	let countIdx = $state(0);
 	let countInterval = $state();
 	onMount(() => {
 		if (wordsArray) {
-			nextWord();
+			currIdx = 0;
+			setTimeout(nextWord, wordsArray[0].numSyllables * 500);
 		}
 	});
 	const nextWord = () => {
@@ -36,8 +39,15 @@
 				countIdx = 0;
 			}
 		}
-		if (wordsArray[currIdx]?.numSyllables) {
-			setTimeout(nextWord, (wordsArray[currIdx].numSyllables) * 250);
+		let word = wordsArray[currIdx]?.word;
+		let numSyllables = wordsArray[currIdx]?.numSyllables;
+		if (numSyllables) {
+			let time = numSyllables * 250;
+			let lastChar = word[word.length - 1];
+			if (stopChars.includes(lastChar)) {
+				time += 250;
+			}
+			setTimeout(nextWord, time);
 			countInterval = setInterval(() => {
 				countIdx++;
 			}, 250);
@@ -48,11 +58,16 @@
 </script>
 
 {#if siteState.text}
-	<div class="flex flex-col justify-center items-center p-4">
+	<div class="flex flex-col min-h-dvh justify-center items-center p-4">
 		<div>{wordsArray[currIdx].word}</div>
 		<div class="flex">
 			{#each new Array(wordsArray[currIdx].numSyllables) as _, idx (idx)}
-				<div class="border p-4 shrink-0 rounded-full {countIdx >= idx && wordsArray[currIdx].numSyllables > 1 ? 'bg-black' : ''}"></div>
+				<div
+					class="border p-4 shrink-0 rounded-full {countIdx >= idx &&
+					wordsArray[currIdx].numSyllables > 1
+						? 'bg-black'
+						: ''}"
+				></div>
 			{/each}
 		</div>
 	</div>

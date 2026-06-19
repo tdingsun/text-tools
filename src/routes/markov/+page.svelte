@@ -2,9 +2,8 @@
 	import { siteState } from '$lib/states.svelte';
 	import { RiTa } from 'rita';
 	import { onMount } from 'svelte';
-	let wordsArray = $derived(siteState.text.trim().split(' '));
 	let rm = RiTa.markov(2);
-	let generatedSentences = $state([]);
+	let generatedSentences: string[][] = $state([]);
 	$effect(() => {
 		rm = RiTa.markov(2);
 		rm.addText(siteState.text);

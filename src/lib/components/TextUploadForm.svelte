@@ -5,20 +5,21 @@
 	const onSubmit = (e: Event) => {
 		e.preventDefault();
 		siteState.text = textarea.value;
+		localStorage.setItem('text', textarea.value);
+		textarea.value = '';
 	};
 </script>
 
-<div class="flex flex-col gap-4 max-w-lg">
-	<form onsubmit={onSubmit} class="flex flex-col">
-		<textarea bind:this={textarea} class="border text-xs field-sizing-content min-h-12" id="text"
-		></textarea>
-		<div>
-			<button
-				type="submit"
-				class="px-4 py-3 border border-t-0 cursor-pointer hover:bg-black hover:text-white"
-			>
-				Upload Text
-			</button>
-		</div>
-	</form>
-</div>
+<form onsubmit={onSubmit} class="flex items-center w-full h-12">
+	<textarea
+		bind:this={textarea}
+		maxlength="9999"
+		class=" w-full border border-r-0 rounded-l text-xs h-full resize-none"
+		id="text"></textarea>
+		<button
+			type="submit"
+			class="px-4 rounded-r h-full border whitespace-nowrap cursor-pointer hover:bg-black hover:text-white"
+		>
+			Upload Text
+		</button>
+</form>
