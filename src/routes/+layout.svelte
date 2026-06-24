@@ -15,7 +15,9 @@
 	});
 </script>
 
-<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<svelte:head>
+<title>Text Tools</title>
+</svelte:head>
 
 {#if page.url.pathname !== '/'}
 	<div class="flex w-full gap-4 p-4 border-b">

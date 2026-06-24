@@ -20,4 +20,10 @@
 		<NavLink href="/mutation">8. Mutation</NavLink>
 		<NavLink href="/generation">9. Generation</NavLink>
 	</div>
+	<div>
+		<NavLink target="_blank"
+			href="https://docs.google.com/document/d/1190uTpfC6SvNqJJb7VSX8dNK-f8oCBHf-9g6YXc89JY/edit?usp=sharing"
+			>Link to Readings</NavLink
+		>
+	</div>
 </div>
