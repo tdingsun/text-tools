@@ -3,6 +3,7 @@
 
 	import { onMount } from 'svelte';
 	import { RiTa } from 'rita';
+	import Button from '$lib/components/Button.svelte';
 	let wordsArray = $derived(
 		siteState.text
 			.trim()
@@ -35,21 +36,25 @@
 
 	const getKWIC = (word) => {
 		clickedWord = word;
-		lines = RiTa.kwic(word, { numWords: 5 });
+		lines = RiTa.kwic(word, { numWords: 3 });
 	};
 </script>
 
 {#if siteState.text}
 	<div class="flex p-4">
-		<div class="flex flex-col items-center">
+		<div class="flex flex-col gap-2 items-center overflow-auto max-h-[calc(100dvh-12rem)] pr-8">
 			{#each concordanceSorted as [word, freq], idx (idx)}
-				<div class="flex gap-4">
-					<div onclick={() => getKWIC(word)} class="w-48">
-						{word}
-					</div>
-					<div class="w-48">
-						{freq}
-					</div>
+				<div class="flex gap-4 items-stretch w-full">
+					<Button onclick={() => getKWIC(word)} class="w-full">
+						<div class="flex justify-between gap-4">
+							<span>
+								{word}
+							</span>
+							<span>
+								{freq}
+							</span>
+						</div>
+					</Button>
 				</div>
 			{/each}
 		</div>

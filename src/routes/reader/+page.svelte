@@ -22,7 +22,10 @@
 	onMount(() => {
 		if (wordsArray) {
 			currIdx = 0;
-			setTimeout(nextWord, wordsArray[0].numSyllables * 500);
+			countInterval = setInterval(() => {
+				countIdx++;
+			}, 250);
+			setTimeout(nextWord, wordsArray[0].numSyllables * 250);
 		}
 	});
 	const nextWord = () => {

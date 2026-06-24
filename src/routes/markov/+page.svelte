@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import { siteState } from '$lib/states.svelte';
 	import { RiTa } from 'rita';
 	import { onMount } from 'svelte';
@@ -23,17 +24,22 @@
 </script>
 
 {#if siteState.text}
-	<button onclick={generate} class="border p-4">Generate</button>
+	<div class="flex flex-col justify-center items-center">
+		<Button onclick={generate} class="sticky top-8 bg-white">Generate</Button>
 
-	<div class="flex justify-center">
-		<div class="p-4 max-w-lg">
-			{#each generatedSentences as sentences, idx (idx)}
-				{#each sentences as sentence, idx (idx)}
-					<div>
-						{sentence}
-					</div>
+		<div class="flex justify-center">
+			<div class="p-4 max-w-lg">
+				{#each generatedSentences as sentences, i (i)}
+					{#each sentences as sentence, j (j)}
+						<div class="flex gap-4">
+							<div>{i*3 + j + 1}</div>
+							<div>
+								{sentence}
+							</div>
+						</div>
+					{/each}
 				{/each}
-			{/each}
+			</div>
 		</div>
 	</div>
 {/if}

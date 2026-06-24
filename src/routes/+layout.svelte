@@ -22,7 +22,7 @@
 		<div>TextTools</div>
 
 		<div>
-			<div class="flex gap-2 flex-wrap">
+			<div class="flex gap-1 flex-wrap">
 				<NavLink href="/sort">Sort</NavLink>
 				<NavLink href="/reader">Reader</NavLink>
 				<NavLink href="/mutation">Mutation</NavLink>

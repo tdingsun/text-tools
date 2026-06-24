@@ -5,22 +5,30 @@
 	let initialWordsArray = $derived(
 		siteState.text
 			.trim()
-			.replaceAll(/[.,!?]+/g, '')
+			// .replaceAll(/[.,!?]+/g, '')
 			.split(' ')
 	);
 
 	let sortedWordsArray = $state(initialWordsArray);
 	let lengthSortDirection = $state(true);
+	let alphaSortDirection = $state(true);
+	let orderSortDirection = $state(true);
 
 	const sortByLength = () => {
 		sortedWordsArray = initialWordsArray;
 		if (lengthSortDirection) {
 			sortedWordsArray.sort((a, b) => {
-				return a.length - b.length || a.localeCompare(b);
+				return (
+					a.replaceAll(/[.,!?]+/g, '').length - b.replaceAll(/[.,!?]+/g, '').length ||
+					a.localeCompare(b)
+				);
 			});
 		} else {
 			sortedWordsArray.sort((a, b) => {
-				return b.length - a.length || a.localeCompare(b);
+				return (
+					b.replaceAll(/[.,!?]+/g, '').length - a.replaceAll(/[.,!?]+/g, '').length ||
+					a.localeCompare(b)
+				);
 			});
 		}
 		lengthSortDirection = !lengthSortDirection;
@@ -28,7 +36,7 @@
 
 	const sortAlphabetically = () => {
 		sortedWordsArray = initialWordsArray;
-		if (lengthSortDirection) {
+		if (alphaSortDirection) {
 			sortedWordsArray.sort((a, b) => {
 				return a.localeCompare(b);
 			});
@@ -37,7 +45,7 @@
 				return b.localeCompare(a);
 			});
 		}
-		lengthSortDirection = !lengthSortDirection;
+		alphaSortDirection = !alphaSortDirection;
 	};
 
 	const randomShuffle = () => {
@@ -46,15 +54,25 @@
 
 	const reverseOrder = () => {
 		sortedWordsArray = initialWordsArray.reverse();
+		orderSortDirection = !orderSortDirection;
 	};
 </script>
 
 {#if siteState.text}
-	<div class="p-4">
-		<Button onclick={sortByLength}>Sort by length</Button>
-		<Button onclick={sortAlphabetically}>Sort Alphabetically</Button>
-		<Button onclick={randomShuffle}>Randomize</Button>
-		<Button onclick={reverseOrder}>Reverse</Button>
+	<div class="flex flex-col justify-center items-center gap-8">
+		<div>
+			<Button onclick={reverseOrder}
+				>{orderSortDirection ? 'Reverse Order' : 'Original Order'}</Button
+			>
+
+			<Button onclick={sortByLength}
+				>Sort by Length <span>{lengthSortDirection ? '↑' : '↓'}</span></Button
+			>
+			<Button onclick={sortAlphabetically}
+				>Sort Alphabetically <span>{alphaSortDirection ? '↑' : '↓'}</span></Button
+			>
+			<Button onclick={randomShuffle}>Randomize <span></span></Button>
+		</div>
 
 		<div class="flex justify-center">
 			<div class="p-4 max-w-lg">

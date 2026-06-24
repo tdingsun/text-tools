@@ -14,12 +14,22 @@
 
 {#if siteState.text}
 	<div class="p-4">
-		<div class="flex gap-2">
-			{#each numButtons as _, idx (idx)}
-				<Button onclick={() => (mod = idx + 1)}>{idx + 1}</Button>
-			{/each}
-			<Button onclick={() => (displayType = 'blur')} class="{displayType === 'blur' ? 'bg-green-100' : ''}">Blur</Button>
-			<Button onclick={() => (displayType = 'vanish')} class="{displayType === 'vanish' ? 'bg-green-100' : ''}">Vanish</Button>
+		<div class="flex gap-8 justify-center pb-8">
+			<div class="flex gap-1">
+				{#each numButtons as _, idx (idx)}
+					<Button onclick={() => (mod = idx + 1)} class="{mod === idx + 1 ? 'bg-green-200' : ''}">{idx + 1}</Button>
+				{/each}
+			</div>
+			<div>
+				<Button
+					onclick={() => (displayType = 'blur')}
+					class={displayType === 'blur' ? 'bg-green-100' : ''}>Blur</Button
+				>
+				<Button
+					onclick={() => (displayType = 'vanish')}
+					class={displayType === 'vanish' ? 'bg-green-100' : ''}>Vanish</Button
+				>
+			</div>
 		</div>
 
 		<div class="flex justify-center">

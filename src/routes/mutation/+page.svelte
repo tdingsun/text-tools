@@ -12,6 +12,8 @@
 		})
 	);
 
+	let mode = $state('');
+
 	$effect(
 		() =>
 			(mutatedCopy = wordsArray.map((word) => {
@@ -27,6 +29,7 @@
 		if (interval) {
 			clearInterval(interval);
 		}
+		mode = '';
 	};
 
 	const reset = () => {
@@ -41,6 +44,8 @@
 
 	const mutateAlliteration = () => {
 		stop();
+		mode = 'alliteration';
+
 		interval = setInterval(() => {
 			let randIdx = Math.floor(Math.random() * mutatedCopy.length);
 			let word = mutatedCopy[randIdx].word.replaceAll(/[.,!?]+/g, '');
@@ -61,6 +66,8 @@
 
 	const mutateSoundsLike = () => {
 		stop();
+		mode = 'soundslike';
+
 		interval = setInterval(() => {
 			let randIdx = Math.floor(Math.random() * mutatedCopy.length);
 			let word = mutatedCopy[randIdx].word.replaceAll(/[.,!?]+/g, '');
@@ -77,6 +84,8 @@
 
 	const mutateSpellsLike = () => {
 		stop();
+		mode = 'spellslike';
+
 		interval = setInterval(() => {
 			let randIdx = Math.floor(Math.random() * mutatedCopy.length);
 			let word = mutatedCopy[randIdx].word.replaceAll(/[.,!?]+/g, '');
@@ -93,6 +102,8 @@
 
 	const mutateRhyme = () => {
 		stop();
+		mode = 'rhyme';
+
 		interval = setInterval(() => {
 			let randIdx = Math.floor(Math.random() * mutatedCopy.length);
 			let word = mutatedCopy[randIdx].word.replaceAll(/[.,!?]+/g, '');
@@ -108,23 +119,29 @@
 	};
 </script>
 
-
-		<Button onclick={reset}>Reset</Button>
-
-		<Button onclick={stop}>Stop</Button>
-		<Button onclick={mutateAlliteration}>Alliterations</Button>
-		<Button onclick={mutateSoundsLike}>Sounds Like</Button>
-		<Button onclick={mutateSpellsLike}>Spells Like</Button>
-		<Button onclick={mutateRhyme}>Rhymes</Button>
-
-		<div class="flex justify-center">
-			<div class="p-4 max-w-lg">
-				{#each mutatedCopy as word, idx (idx)}
-					<span class={word?.isMutated ? 'text-red-500' : ''}>
-						{word?.word}{#if word?.isMutated}<span>({wordsArray[idx]})</span>{/if}
-					</span>
-					<span> </span>
-				{/each}
-			</div>
+<div class="flex flex-col gap-8 justify-center items-center">
+	<div class="flex gap-8">
+		<div>
+			<Button onclick={mutateAlliteration} class="{mode === 'alliteration' ? 'bg-green-100' : ''}">Alliterations</Button>
+			<Button onclick={mutateSoundsLike} class="{mode === 'soundslike' ? 'bg-green-100' : ''}">Sounds Like</Button>
+			<Button onclick={mutateSpellsLike} class="{mode === 'spellslike' ? 'bg-green-100' : ''}">Spells Like</Button>
+			<Button onclick={mutateRhyme} class="{mode === 'rhyme' ? 'bg-green-100' : ''}">Rhymes</Button>
 		</div>
+		<div>
+			<Button onclick={reset}>Reset</Button>
 
+			<Button onclick={stop}>Stop</Button>
+		</div>
+	</div>
+
+	<div class="flex justify-center">
+		<div class="p-4 max-w-lg">
+			{#each mutatedCopy as word, idx (idx)}
+				<span class={word?.isMutated ? 'text-red-500' : ''}>
+					{word?.word}{#if word?.isMutated}<span>({wordsArray[idx]})</span>{/if}
+				</span>
+				<span> </span>
+			{/each}
+		</div>
+	</div>
+</div>

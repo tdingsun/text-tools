@@ -9,7 +9,7 @@
 		<TextUploadForm></TextUploadForm>
 	</div>
 	<CurrentTextDisplay></CurrentTextDisplay>
-	<div class="flex">
+	<div class="flex flex-wrap gap-2">
 		<NavLink href="/sort">Sort</NavLink>
 		<NavLink href="/reader">Reader</NavLink>
 		<NavLink href="/mutation">Mutation</NavLink>
