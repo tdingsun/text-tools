@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let { char } = $props();
+	let { char, speed = 1 } = $props();
 	let xOffset = $state(0);
 	let yOffset = $state(0);
+	let halfSpeed = $derived(speed / 2);
 	onMount(() => {
 		setInterval(() => {
-			xOffset += Math.random() * 1 - 0.5;
-			yOffset += Math.random() * 1 - 0.5;
+			xOffset += Math.random() * speed - halfSpeed;
+			yOffset += Math.random() * speed - halfSpeed;
 		}, 66);
 	});
 
@@ -17,6 +18,8 @@
 	};
 </script>
 
-<span onmouseover={reset} style="transform: translate({xOffset}px, {yOffset}px);" class="inline-block min-w-1"
-	>{char}</span
+<span
+	onmouseover={reset}
+	style="transform: translate({xOffset}px, {yOffset}px);"
+	class="inline-block min-w-1">{@html char}</span
 >

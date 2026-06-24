@@ -17,6 +17,7 @@
 	);
 	let concordance = $state({});
 	let concordanceSorted = $state([]);
+	let numWords = $state(3);
 	let kwic = $state({});
 	$effect(() => {
 		concordance = RiTa.concordance(siteState.text, {
@@ -36,13 +37,18 @@
 
 	const getKWIC = (word) => {
 		clickedWord = word;
-		lines = RiTa.kwic(word, { numWords: 3 });
+		lines = RiTa.kwic(word, { numWords: numWords });
 	};
 </script>
 
 {#if siteState.text}
+	<div class="flex gap-4">
+		<span># Words</span><input type="range" min="1" max="10" bind:value={numWords} /><span
+			>{numWords}</span
+		>
+	</div>
 	<div class="flex p-4">
-		<div class="flex flex-col gap-2 items-center overflow-auto max-h-[calc(100dvh-12rem)] pr-8">
+		<div class="flex flex-col gap-2 items-center overflow-auto max-h-[calc(100dvh-12rem)] pr-4">
 			{#each concordanceSorted as [word, freq], idx (idx)}
 				<div class="flex gap-4 items-stretch w-full">
 					<Button onclick={() => getKWIC(word)} class="w-full">
@@ -60,7 +66,7 @@
 		</div>
 		<div>
 			{#if lines}
-				<div class="flex flex-col">
+				<div class="flex flex-col pl-4">
 					{#each lines as line, idx (idx)}
 						<div>
 							{#each line.split(' ') as word, idx (idx)}
