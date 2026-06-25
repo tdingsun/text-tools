@@ -32,5 +32,10 @@
 			<NavLink target="_blank" href="https://github.com/tdingsun/text-tools">Link to Github</NavLink
 			>
 		</div>
+		<div>
+			<NavLink target="_blank" href="https://drive.google.com/drive/folders/1f8RMZn6E43MbITkAkFgLIQvF9447Kr2r?usp=sharing">Link to Google Drive</NavLink
+			>
+		</div>
+		
 	</div>
 </div>
