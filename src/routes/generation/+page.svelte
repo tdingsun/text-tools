@@ -6,23 +6,26 @@
 	let rm = RiTa.markov(2);
 	let generatedSentences: string[][] = $state([]);
 	let temp = $state(2);
+	let numTokens = $state(2);
 	let numSentences = $state(1);
 	$effect(() => {
-		rm = RiTa.markov(2);
+		rm = RiTa.markov(numTokens);
 		rm.addText(siteState.text);
 	});
 
 	onMount(() => {
-		let rm = RiTa.markov(2);
+		let rm = RiTa.markov(numTokens);
 		rm.addText(siteState.text);
 	});
 
 	const generate = () => {
 		let sentences;
 		if (numSentences === 1) {
-			sentences = [rm.generate({
-				temperature: temp
-			})];
+			sentences = [
+				rm.generate({
+					temperature: temp
+				})
+			];
 		} else {
 			sentences = rm.generate(numSentences, {
 				temperature: temp

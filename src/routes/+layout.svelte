@@ -20,7 +20,7 @@
 </svelte:head>
 
 {#if page.url.pathname !== '/'}
-	<div class="flex w-full gap-4 p-4 border-b">
+	<div class="flex w-full gap-4 p-4 border-b text-blue-800">
 		<a href="/" class="whitespace-nowrap pt-1">Text Tools</a>
 
 		<div>
@@ -43,7 +43,7 @@
 {/if}
 
 {#if siteState.text || page.url.pathname === '/'}
-	<div class="p-4">
+	<div class="p-4 text-blue-800">
 		{@render children()}
 	</div>
 {/if}

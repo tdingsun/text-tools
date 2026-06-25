@@ -68,7 +68,7 @@
 				<div
 					class="border p-4 shrink-0 rounded-full {countIdx >= idx &&
 					wordsArray[currIdx].numSyllables > 1
-						? 'bg-black'
+						? 'bg-blue-900'
 						: ''}"
 				></div>
 			{/each}

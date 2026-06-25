@@ -18,7 +18,7 @@
 		id="text"></textarea>
 		<button
 			type="submit"
-			class="px-4 rounded-r h-full border whitespace-nowrap cursor-pointer hover:bg-black hover:text-white"
+			class="px-4 rounded-r h-full border whitespace-nowrap cursor-pointer hover:bg-blue-900 hover:text-white"
 		>
 			Upload Text
 		</button>
