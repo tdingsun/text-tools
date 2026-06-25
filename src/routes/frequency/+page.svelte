@@ -23,7 +23,7 @@
 		concordance = RiTa.concordance(siteState.text, {
 			ignoreCase: true,
 			ignorePunctuation: true,
-			ignoreStopWords: true
+			ignoreStopWords: false
 		});
 	});
 	$effect(() => {
